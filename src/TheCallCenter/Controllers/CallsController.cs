@@ -15,12 +15,12 @@ namespace TheCallCenter.Controllers
   public class CallsController : Controller
   {
     private readonly CallCenterContext _ctx;
-    private readonly IHubContext<CallCenterHub> _hubContext;
+    
 
-    public CallsController(CallCenterContext ctx,IHubContext<CallCenterHub> hubContext)
+    public CallsController(CallCenterContext ctx)
     {
       _ctx = ctx;
-      _hubContext = hubContext;
+     
     }
 
     [HttpGet]

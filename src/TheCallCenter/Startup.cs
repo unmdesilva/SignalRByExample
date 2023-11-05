@@ -31,13 +31,7 @@ namespace TheCallCenter
         options.MinimumSameSitePolicy = SameSiteMode.None;
       });
 
-      /* 
-       * 2023-06-12 - Differ from Video: 
-       * Replaces AddMvc() with AddControllersWithViews(). 
-       * AddMvc Enables Razor Pages when we don't need that feature. Adding
-       * Mvc instead of just "ControllersWithViews" adds a performance hit that's
-       * unnecessary
-       */
+ 
       services.AddControllersWithViews();
 
       services.AddSignalR(cfg=>cfg.EnableDetailedErrors=false);
@@ -62,10 +56,7 @@ namespace TheCallCenter
      
       app.UseEndpoints(routes =>
       {
-        /* 
-         * 2023-06-12 - Differ From Video
-         * MapHub<T> exists in app.UseEndpoints delegate, NOT in app.UseSignalR delegate anymore.
-         */
+        
 
         routes.MapHub<CallCenterHub>("/callcenter");
 

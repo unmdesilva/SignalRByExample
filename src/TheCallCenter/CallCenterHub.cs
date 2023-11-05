@@ -4,11 +4,11 @@ using TheCallCenter.Data.Entities;
 
 namespace TheCallCenter
 {
-  public class CallCenterHub:Hub
+  public class CallCenterHub : Hub<ICallCenterHub>
   {
     public async Task NewCallReceived(Call newcall)
     {
-      await Clients.All.SendAsync("NewCallRecived", newcall);
+      await Clients.All.NewCallReceived(newcall);
     }
   }
 }
