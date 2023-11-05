@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using TheCallCenter.Data;
 
@@ -14,10 +15,12 @@ namespace TheCallCenter.Controllers
   public class CallsController : Controller
   {
     private readonly CallCenterContext _ctx;
+    private readonly IHubContext<CallCenterHub> _hubContext;
 
-    public CallsController(CallCenterContext ctx)
+    public CallsController(CallCenterContext ctx,IHubContext<CallCenterHub> hubContext)
     {
       _ctx = ctx;
+      _hubContext = hubContext;
     }
 
     [HttpGet]

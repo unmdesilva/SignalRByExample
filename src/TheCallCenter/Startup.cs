@@ -39,6 +39,8 @@ namespace TheCallCenter
        * unnecessary
        */
       services.AddControllersWithViews();
+
+      services.AddSignalR(cfg=>cfg.EnableDetailedErrors=false);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,12 +59,15 @@ namespace TheCallCenter
       app.UseRouting();
       app.UseCookiePolicy();
 
+     
       app.UseEndpoints(routes =>
       {
         /* 
          * 2023-06-12 - Differ From Video
          * MapHub<T> exists in app.UseEndpoints delegate, NOT in app.UseSignalR delegate anymore.
          */
+
+        routes.MapHub<CallCenterHub>("/callcenter");
 
         routes.MapControllerRoute(
           "default",

@@ -12,6 +12,13 @@ $(document).ready(() => {
     deleteCall(this);
   });
 
+  const client = new signalR.HubConnectionBuilder().withUrl("/callcenter").configureLogging("none").build();
+
+  client.on("NewCallReceived", newCall => {
+
+    addCall(newCall);
+  })
+                  
 
   function addCalls() {
     $logBody.empty();
@@ -44,6 +51,7 @@ $(document).ready(() => {
       .then(res => {
         calls = res;
         addCalls();
+        client.start();
       })
       .catch(() => {
         $theWarning.text("Failed to get calls...");
